@@ -67,10 +67,12 @@ def mark(results):
 
 ZERO = "###@@@ZERO@@@###"
 for fname in sorted(listdir(SCRAPED_DIR_PATH)):
-    print("!", fname)
+    
     index = int(fname[:3])
     if index < skips:
         continue
+    print("!", fname)
+    fname = SCRAPED_DIR_PATH + fname
 
     A = []
     with open(fname, encoding='utf-8') as fi:
@@ -99,4 +101,14 @@ with open('saved_ratings.txt', 'w', encoding='utf-8') as fo:
     for i, (name, (r, p)) in enumerate(items, 1):
         _ = fo.write("{}\t{}\t{}\t{}\n".format(i, name, r, p))
 
-print("done")
+with open('saved_ratings_top5000.txt', 'w', encoding='utf-8') as fo:
+    _ = fo.write("{} contests\n".format(index + 1))
+    _ = fo.write("rank\tname\trating\tparticipations\n")
+    for i, (name, (r, p)) in enumerate(items[:5000], 1):
+        _ = fo.write("{}\t{}\t{}\t{}\n".format(i, name, r, p))
+        
+print("R  Name                   Rating   Participations")
+for i, (name, (r, p)) in enumerate(items[:50], 1):
+    print(str(i).zfill(2), name + ' ' * (22 - len(name)), int(round(r)), '   ', p)
+
+          

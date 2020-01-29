@@ -36,7 +36,7 @@ for d in range(63, 139):
     contests.append("weekly-contest-" + str(d))
 
 d0 = 139
-for d in range(1, 18):
+for d in range(1, 19):
     contests.append("biweekly-contest-" + str(d))
     contests.append("weekly-contest-" + str(d0))
     d0 += 1
@@ -48,6 +48,7 @@ for d in range(1, 18):
 ZERO = "###@@@ZERO@@@###"
 for i, contest in enumerate(contests):
     fname = str(i).zfill(3) + contest + ".txt"
+    fname = "c:/leetcode/leaderboard/scraped/" + fname
     try:
         with open(fname, encoding="utf-8") as fi:
             res = fi.read()
