@@ -35,6 +35,8 @@ def mark(results):
     newrating = {}
     ratings_local = [ratings[n] for n in results]
     for i, name1 in enumerate(results):
+        if i % 200 == 0:
+            print(f"on {i} of {len(results)})
         erank = 1
         r1 = ratings_local[i][0]
         for j, name2 in enumerate(results):
@@ -94,19 +96,14 @@ for fname in sorted(listdir(SCRAPED_DIR_PATH)):
     #    print(row[0], round(row[1][0], 3))
 
 # Dump ratings info to file
-items = sorted(ratings.items(), key = lambda z: [-z[1][0], -z[1][1], z[0]])
-with open('saved_ratings.txt', 'w', encoding='utf-8') as fo:
-    _ = fo.write("{} contests\n".format(index + 1))
-    _ = fo.write("rank\tname\trating\tparticipations\n")
-    for i, (name, (r, p)) in enumerate(items, 1):
-        _ = fo.write("{}\t{}\t{}\t{}\n".format(i, name, r, p))
+stuff = sorted(ratings.items(), key = lambda z: [-z[1][0], -z[1][1], z[0]])
+for stub, items in (('', stuff), ('_top5000', stuff[:5000])):
+    with open('saved_ratings'+stub+'.txt', 'w', encoding='utf-8') as fo:
+        _ = fo.write("{} contests\n".format(index + 1))
+        _ = fo.write("rank\tname\trating\tparticipations\n")
+        for i, (name, (r, p)) in enumerate(items, 1):
+            _ = fo.write("{}\t{}\t{}\t{}\n".format(i, name, r, p))
 
-with open('saved_ratings_top5000.txt', 'w', encoding='utf-8') as fo:
-    _ = fo.write("{} contests\n".format(index + 1))
-    _ = fo.write("rank\tname\trating\tparticipations\n")
-    for i, (name, (r, p)) in enumerate(items[:5000], 1):
-        _ = fo.write("{}\t{}\t{}\t{}\n".format(i, name, r, p))
-        
 print("R  Name                   Rating   Participations")
 for i, (name, (r, p)) in enumerate(items[:50], 1):
     print(str(i).zfill(2), name + ' ' * (22 - len(name)), int(round(r)), '   ', p)
