@@ -1,6 +1,7 @@
 from collections import defaultdict
 from heapq import nsmallest
 from os import listdir
+from time import time
 
 SCRAPED_DIR_PATH = "C:/leetcode/leaderboard/scraped/"
 ratings = defaultdict(lambda: [1500.0, 0])  # rating, participations
@@ -34,9 +35,15 @@ def mark(results):
     """
     newrating = {}
     ratings_local = [ratings[n] for n in results]
+    start_time = time()
     for i, name1 in enumerate(results):
         if i % 200 == 0:
-            print(f"on {i} of {len(results)})
+            if i:
+                time_per_res = (time() - start_time) / i
+                prediction = time_per_res * (len(results) - i)
+            else:
+                prediction = -1
+            print(f"on {i} of {len(results)}; eta={round(prediction, 1)}")
         erank = 1
         r1 = ratings_local[i][0]
         for j, name2 in enumerate(results):
