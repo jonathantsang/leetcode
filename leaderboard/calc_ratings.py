@@ -68,8 +68,8 @@ def mark(results):
         k1 = ratings_local[i][1] + 1
         delta = f(k1) * ((lo + hi) / 2.0 - r1)
         newrating[name1] = r1 + delta
-        if name1 == 'awice':
-            print(name1, ratings_local[i], newrating[name1])
+        if i < 100:
+            print(name1, ratings_local[i], erank, newrating[name1])
 
     for n, r in newrating.items():
         ratings[n][0] = r
