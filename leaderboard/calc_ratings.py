@@ -53,7 +53,7 @@ def mark(results):
         rhs = (erank * (i+1)) ** 0.5
 
         # Binary search for expected rating
-        lo, hi = -2000, 5000
+        lo, hi = -500, 4500
         while lo + 1e-4 < hi:
             mi = (lo + hi) / 2.0
             lhs = 1
