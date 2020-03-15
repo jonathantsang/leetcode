@@ -43,8 +43,6 @@ for d in range(1, 22):
     contests.append("weekly-contest-" + str(d0))
     d0 += 1
 
-contests.pop()
-
 
 # Read results
 ZERO = "###@@@ZERO@@@###"
