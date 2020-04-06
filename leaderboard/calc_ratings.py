@@ -117,4 +117,27 @@ print("R  Name                   Rating   Participations")
 for i, (name, (r, p)) in enumerate(items[:50], 1):
     print(str(i).zfill(2), name + ' ' * (22 - len(name)), int(round(r)), '   ', p)
 
-          
+
+# Max rating stuff
+maxes = {}
+with open('max_ratings.txt', encoding='utf-8') as fi:
+    for line in fi:
+        line = line.split()
+        maxes[line[1]] = int(line[2])
+
+for name, (r, p) in items[:50]:
+    if name in maxes:
+        maxes[name] = max(maxes[name], int(round(r)))
+    else:
+        maxes[name] = int(round(r))
+
+maxitems = list(maxes.items())
+maxitems.sort(key = lambda item: -item[1])
+print("Max Ratings")
+print("R  Name                   Rating")
+for i, (name, r) in enumerate(maxitems[:20], 1):
+    print(str(i).zfill(2), name + ' ' * (22 - len(name)), int(round(r)))
+
+with open('max_ratings.txt', 'w', encoding='utf-8') as fo:
+    for i, (name, r) in enumerate(maxitems[:20], 1):
+        fo.write("{} {} {}\n".format(i, name, int(round(r))))

@@ -36,7 +36,7 @@ for d in range(63, 139):
     contests.append("weekly-contest-" + str(d))
 
 d0 = 139
-for d in range(1, 23):
+for d in range(1, 24):
     contests.append("biweekly-contest-" + str(d))
     contests.append("weekly-contest-" + str(d0))
     d0 += 1
@@ -65,7 +65,7 @@ for i, contest in enumerate(contests):
         url = URL.format(contest, str(d))
         browser.get(url)
         try:
-            myElem = WebDriverWait(browser, 13).until(
+            myElem = WebDriverWait(browser, 20).until(
                 EC.presence_of_element_located((By.CLASS_NAME, "ranking-username"))
             )
         except:
