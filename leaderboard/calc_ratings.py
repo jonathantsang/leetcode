@@ -6,6 +6,7 @@ from time import time
 SCRAPED_DIR_PATH = "C:/leetcode/leaderboard/scraped/"
 ratings = defaultdict(lambda: [1500.0, 0])  # rating, participations
 skips = 0
+UNRATED_CONTEST_IDS = [228, 229]  # These contests were unrated by LC
 
 with open('saved_ratings.txt', encoding='utf-8') as fi:
     skips = int(fi.readline().split()[0])
@@ -81,6 +82,8 @@ for fname in sorted(listdir(SCRAPED_DIR_PATH)):
     
     index = int(fname[:3])
     if index < skips:
+        continue
+    if index in UNRATED_CONTEST_IDS:
         continue
     print("!", fname)
     fname = SCRAPED_DIR_PATH + fname
