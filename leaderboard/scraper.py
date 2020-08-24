@@ -36,7 +36,7 @@ for d in range(63, 139):
     contests.append("weekly-contest-" + str(d))
 
 d0 = 139
-for d in range(1, 33):
+for d in range(1, 34):
     contests.append("biweekly-contest-" + str(d))
     contests.append("weekly-contest-" + str(d0))
     d0 += 1
